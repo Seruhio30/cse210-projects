@@ -4,21 +4,31 @@ class Program
 {
     static void Main(string[] args)
     {
-        var reference = new Reference("Juan", 3, 16);
-        var scripture = new Scripture(reference, "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree no se pierda, mas tenga vida eterna.");
+        //call to scriptureLibrary
+        var scriptureLibrary = new ScriptureLibrary();
+
+        //Call an additional class where I create a library with 4 scriptures that change every time it initializes to learn a scripture.
+        var scripture = scriptureLibrary.GetRandomScripture();
 
         while (true)
         {
             Console.Clear();
             Console.WriteLine(scripture.GetDisplayText());
-            Console.WriteLine("Presione Enter para continuar o escriba 'salir' para salir.");
+
+            Console.WriteLine("Press Enter to continue or type 'exit' to quit.");
             var input = Console.ReadLine();
-            if (input.ToLower() == "salir")
+
+
+            if (input.ToLower() == "exit")
                 break;
-            scripture.HideNextWord();
-            if (scripture.AllWordsHidden())
+
+            //Hide a random word in each iteration
+            scripture.HideRandomWords(1);
+
+            if (scripture.IsCompletelyHidden())
             {
-                Console.WriteLine("Todas las palabras están ocultas. Juego terminado.");
+
+                Console.WriteLine("GOOD JOB, YOU LEARN ALL THE SCRIPTURE");
                 break;
             }
         }

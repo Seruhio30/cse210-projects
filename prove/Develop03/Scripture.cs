@@ -15,23 +15,37 @@ public class Scripture
         _random = new Random();
     }
 
-    public void HideNextWord()
+    public void HideRandomWords(int numberToHide)
     {
-        var words = _words.Where(word => !word.IsHidden()).ToList();
-        if (words.Count == 0)
+        if (numberToHide <= 0)
             return;
 
-        var index = _random.Next(words.Count);
-        words[index].Hide();
-    }
+        var wordsToHide = _words.Where(word => !word.IsHidden()).ToList();
+        if (wordsToHide.Count == 0)
+            return;
 
-    public bool AllWordsHidden()
-    {
-        return _words.All(word => word.IsHidden());
+        for (int i = 0; i < numberToHide; i++)
+        {
+            var index = _random.Next(wordsToHide.Count);
+            wordsToHide[index].Hide();
+            wordsToHide.RemoveAt(index);
+            if (wordsToHide.Count == 0)
+                break;
+        }
     }
 
     public string GetDisplayText()
     {
-        return $"{_reference.GetDisplayText()}\n\n{string.Join(" ", _words.Select(word => word.GetDisplayText()))}";
+        string text = _reference.GetDisplayText() + "\n\n";
+        foreach (var word in _words)
+        {
+            text += word.GetDisplayText() + " ";
+        }
+        return text.Trim();
+    }
+
+    public bool IsCompletelyHidden()
+    {
+        return _words.All(word => word.IsHidden());
     }
 }
