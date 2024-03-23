@@ -32,7 +32,7 @@ while (!Quit)
 
     else if (option == "4")
     {
-
+        break;
     }
 
     else

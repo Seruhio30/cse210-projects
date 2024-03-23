@@ -29,7 +29,7 @@ public class Activity
 
     public void DisplayEndingMessage()
     {
-        Console.WriteLine($"You have completed another {_duration} of {_name} activity");
+        Console.WriteLine($"You have completed another {_duration} seconds of {_name} activity");
     }
 
     public void howSpinner(int seconds)

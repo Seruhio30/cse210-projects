@@ -1,11 +1,14 @@
 using System;
+
 public class ReflectingActivity : Activity
 {
+    private List<string> _originalQuestions;
 
     public ReflectingActivity(string name, string description) : base(name, description)
     {
-
+        _originalQuestions = new List<string>(_questions);
     }
+
     private List<string> _questions = new List<string>
     {
         ">Why was this experience meaningful to you?",
@@ -19,7 +22,6 @@ public class ReflectingActivity : Activity
         ">How can you keep this experience in mind in the future?"
     };
 
-
     private List<string> _prompts = new List<string>
     {
         "---Think of a time when you stood up for someone else.---",
@@ -30,25 +32,27 @@ public class ReflectingActivity : Activity
 
     public void Run()
     {
-        //Mensage inicial
+        // Initial message
         DisplayStartingMessage();
         Thread.Sleep(2);
         Console.WriteLine("Get Ready...");
         howSpinner(3);
         Console.WriteLine("Consider the following prompt:");
         Console.WriteLine();
-        //ramdon prompt
+        // Random prompt
         DisplayPrompt();
         Console.WriteLine();
         Console.WriteLine("When you have something in mind, press Enter to continue");
-        //The loop here continues until the Enter key is pressed. 
+        Console.WriteLine();
+        // The loop here continues until the Enter key is pressed.
         while (Console.ReadKey().Key != ConsoleKey.Enter)
         { }
-        Console.WriteLine("Now ponder of eachof the following questions as they related to this experience");
+        Console.WriteLine("Now ponder each of the following questions as they relate to this experience");
 
         Console.Write("You may begin in..");
         howCountDown(5);
         Console.WriteLine();
+
         DisplayQuestion();
         howSpinner(15);
         Console.WriteLine();
@@ -56,9 +60,11 @@ public class ReflectingActivity : Activity
         howSpinner(15);
         Console.WriteLine();
         Console.WriteLine("Well done :)");
+        howSpinner(3);
+        Console.WriteLine();
         DisplayEndingMessage();
         howSpinner(3);
-
+        Console.WriteLine();
     }
 
     public string GetRandomPrompt()
@@ -70,11 +76,16 @@ public class ReflectingActivity : Activity
 
     public string GetRandomQuestion()
     {
-
-
         Random random = new Random();
         int electedQuestion = random.Next(_questions.Count);
-        return _questions[electedQuestion];
+        string selectedQuestion = _questions[electedQuestion];
+        _questions.RemoveAt(electedQuestion); // Remove the selected question from the list
+        if (_questions.Count == 0)
+        {
+            // If the list is empty, reset it so that questions can be selected again
+            _questions.AddRange(_originalQuestions);
+        }
+        return selectedQuestion;
     }
 
     public void DisplayPrompt()
