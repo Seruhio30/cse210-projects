@@ -10,14 +10,15 @@ public class Activity
         _name = name;
         _description = description;
 
-
     }
 
 
 
     public void DisplayStartingMessage()
     {
+        Console.WriteLine();
         Console.WriteLine($"Welcome to the {_name} activity");
+        Console.WriteLine();
         Console.WriteLine($"This activity will help you {_description}");
         Console.Write("How long, in seconds, would you like for your session: ");
         _duration = Convert.ToInt32(Console.ReadLine());

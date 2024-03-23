@@ -20,12 +20,14 @@ while (!Quit)
 
     else if (option == "2")
     {
-
+        ReflectingActivity reflectingActivity = new ReflectingActivity("Reflecting", "reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.");
+        reflectingActivity.Run();
     }
 
     else if (option == "3")
     {
-
+        ListingActivity listingActivity = new ListingActivity("Listen", "reflect on the good things in your life by having you list as many things as you can in a certain area.");
+        listingActivity.Run();
     }
 
     else if (option == "4")
