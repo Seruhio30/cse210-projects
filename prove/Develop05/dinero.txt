@@ -1,0 +1,2 @@
+SimpleGoal:plata:amo la plata:30
+EternalGoal:que:que bien:30
