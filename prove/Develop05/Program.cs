@@ -23,6 +23,10 @@ class Program
             Console.WriteLine("6. Quit");
             Console.Write("Select a choice from the menu: ");
             string option = Console.ReadLine();
+            Console.WriteLine();
+            Console.WriteLine("----------------------------------------------------------------------------");
+            Console.WriteLine();
+
 
 
             if (option == "1")

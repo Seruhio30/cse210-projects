@@ -1,8 +1,6 @@
-using System.ComponentModel;
-
 class CheckListGoal : Goal
 {
-    private int amountCompleted;
+    private int _amountCompleted;
     private int _target;
     private int _bonus;
 
@@ -12,23 +10,30 @@ class CheckListGoal : Goal
         _bonus = bonus;
     }
 
-
-    public void RecordEvent()
+    public override void RecordEvent()
     {
-
+        // No hacer nada, ya que los objetivos eternos nunca se completan
+        base.RecordEvent(); // Llama al método de la clase base (en este caso, no hace nada)
     }
 
-    public bool IsComplete()
+
+    public override bool IsComplete()
     {
-        // Check if checklist goal is complete
-        return false;
+        return _amountCompleted >= _target;
+    }
+
+    public int GetCompletedCount()
+    {
+        return _amountCompleted;
     }
 
     public string GetDetailString()
     {
-        return "";
+        return $"{_name} - {_description} [Completed {_amountCompleted}/{_target} times]";
     }
 
-    //public override string GetStringRepresentation()
-
+    public string GetStringRepresentation()
+    {
+        return $"{GetType().Name}:{_name}:{_description}:{_points}:{_target}:{_bonus}";
+    }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Diagnostics;
 using System.Runtime;
 using System.IO;
+using System.Collections.Generic;
 
 class GoalMananger
 {
@@ -34,20 +35,43 @@ class GoalMananger
 
     public void ListGoalDetails()
     {
-        // verify if the list have elements
+        // Verificar si la lista tiene elementos
         if (_Goal.Count == 0)
         {
             Console.WriteLine("No hay metas registradas.");
             return;
         }
 
-        // if the list have elements show it
+        // Mostrar la lista de objetivos con detalles
+        Console.WriteLine("------------------------------------------------------------------------------");
         Console.WriteLine("List of Goals:");
+        Console.WriteLine();
         for (int i = 0; i < _Goal.Count; i++)
         {
-            Console.WriteLine($"Goal {i + 1}: {_Goal[i].GetDetailString()}");
+            // Obtener el detalle del objetivo
+            string detail = "";
+
+            // Comprobar si el objetivo está completo
+            if (_Goal[i].IsComplete())
+            {
+                detail += "[X]";
+            }
+            else
+            {
+                detail += "[ ]";
+            }
+
+            // Agregar espacio después del corchete
+            detail += " ";
+
+            // Obtener el detalle del objetivo y agregarlo a detail
+            detail += $"{i + 1}. {_Goal[i].GetDetailString()}";
+
+            // Mostrar el detalle del objetivo
+            Console.WriteLine(detail);
         }
     }
+
 
     public void CreateGoal()
     {
@@ -64,6 +88,9 @@ class GoalMananger
         Console.WriteLine("3. CheckListGoal");
         Console.Write("Which type of goal do you want to create? Enter the number: ");
         string option = Console.ReadLine();
+        Console.WriteLine();
+        Console.WriteLine("---------------------------------------------------------------------------");
+        Console.WriteLine();
 
         switch (option)
         {
@@ -71,27 +98,33 @@ class GoalMananger
                 // Agregar un SimpleGoal a la lista _Goal
                 Console.Write("What is the name of the simple goal?  ");
                 name = Console.ReadLine();
+                Console.WriteLine();
 
                 Console.Write("What is a short description of it:  ");
                 description = Console.ReadLine();
+                Console.WriteLine();
 
                 Console.Write("What is amount of point associated with this goal?  ");
                 points = int.Parse(Console.ReadLine());
+                Console.WriteLine();
 
                 _Goal.Add(new SimpleGoal(name, description, points));
-
                 Console.WriteLine("SimpleGoal created.");
+
                 break;
             case "2":
                 // Agregar un EternalGoal a la lista _Goal
-                Console.Write("What is the name of the simple goal?  ");
+                Console.Write("What is the name of the Eternal goal?  ");
                 name = Console.ReadLine();
+                Console.WriteLine();
 
                 Console.Write("What is a short description of it:  ");
                 description = Console.ReadLine();
+                Console.WriteLine();
 
                 Console.Write("What is amount of point associated with this goal?  ");
                 points = int.Parse(Console.ReadLine());
+                Console.WriteLine();
 
                 _Goal.Add(new EternalGoal(name, description, points));
                 Console.WriteLine("Eternal Goal created.");
@@ -99,20 +132,37 @@ class GoalMananger
 
             case "3":
                 // Agregar un CheckListGoal a la lista _Goal
-                Console.Write("What is the name of the simple goal?  ");
+                Console.Write("What is the name of the CheckList goal?  ");
                 name = Console.ReadLine();
+                Console.WriteLine();
 
                 Console.Write("What is a short description of it:  ");
                 description = Console.ReadLine();
+                Console.WriteLine();
 
                 Console.Write("What is amount of point associated with this goal?  ");
-                points = int.Parse(Console.ReadLine());
+
+                string pointsInput = Console.ReadLine();
+                if (int.TryParse(pointsInput, out points))
+                {
+                    // Conversión exitosa
+                    // points ahora tiene el valor entero
+                }
+                else
+                {
+                    // Manejar el caso en que la entrada no sea un número entero válido
+                    Console.WriteLine("Invalid input. Please enter a valid integer.");
+                }
+
+                Console.WriteLine();
 
                 Console.Write("How many times does this goalneed to be accomplished for a bonus?  ");
                 target = int.Parse(Console.ReadLine());
+                Console.WriteLine();
 
                 Console.Write("What is the bonus for accomplishing it that many times?  ");
                 bonus = int.Parse(Console.ReadLine());
+                Console.WriteLine();
 
                 _Goal.Add(new CheckListGoal(name, description, points, target, bonus));
                 Console.WriteLine("Check List goal created.");
@@ -126,8 +176,22 @@ class GoalMananger
 
     public void RecordEvent()
     {
+        ListGoalNames();
 
+        Console.Write("Enter the goal number you want to record event for: ");
+        int goalNumber = int.Parse(Console.ReadLine()) - 1;
+
+        if (goalNumber >= 0 && goalNumber < _Goal.Count)
+        {
+            _Goal[goalNumber].RecordEvent(); // Llama al método RecordEvent() para el objetivo seleccionado
+            Console.WriteLine("Event recorded successfully.");
+        }
+        else
+        {
+            Console.WriteLine("Invalid goal number.");
+        }
     }
+
 
     public void SafeGoals()
     {
@@ -146,6 +210,7 @@ class GoalMananger
             }
 
             Console.WriteLine("Goals saved to file successfully.");
+            Console.WriteLine("-------------------------------------------------------");
         }
         catch (Exception ex)
         {
@@ -196,6 +261,8 @@ class GoalMananger
             }
 
             Console.WriteLine("Goals loaded successfully!");
+            Console.WriteLine();
+            Console.WriteLine("------------------------------------------------------------------------");
         }
         catch (Exception ex)
         {

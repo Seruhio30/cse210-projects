@@ -1,0 +1,232 @@
+Programa 1: Abstracción con vídeos de YouTube
+Este programa tiene como objetivo crear una aplicación para rastrear videos de YouTube y sus comentarios. Utilizando clases en C#, se deben implementar clases para representar vídeos y comentarios, permitiendo la creación, almacenamiento y visualización de información sobre los vídeos y sus comentarios asociados.
+
+Programa 2: Encapsulación con pedidos en línea
+Este programa se enfoca en desarrollar un sistema de pedidos en línea para una empresa. Utilizando clases en C#, se deben crear clases para representar productos, clientes, direcciones y pedidos. El programa debe calcular precios de pedidos, generar etiquetas de embalaje y envío, todo ello respetando los principios de encapsulación y abstracción.
+
+Programa 3: Herencia con planificación de eventos
+El objetivo de este programa es desarrollar un sistema de seguimiento y marketing para eventos organizados por una empresa de planificación de eventos. Utilizando herencia en C#, se deben crear clases para diferentes tipos de eventos como conferencias, recepciones y reuniones al aire libre. Estas clases deben heredar de una clase base y proporcionar métodos para generar mensajes de marketing basados en los detalles del evento.
+
+Programa 4: Polimorfismo con seguimiento de ejercicio
+Este programa busca crear una aplicación de seguimiento de ejercicio para un gimnasio local. Utilizando polimorfismo en C#, se deben diseñar clases para actividades como correr, ciclismo y natación. Estas clases deben heredar de una clase base y anular métodos para calcular la distancia, velocidad y ritmo de cada actividad. El programa debe permitir la creación de actividades y generar resúmenes de información sobre cada una de ellas.
+
+diseno
+
+Proyecto 1: Abstracción con vídeos de YouTube
+Clase Video:
+Atributos:
+Título
+Autor
+Duración en segundos
+Lista de comentarios (objeto de la clase Comment)
+Métodos:
+Constructor para inicializar los atributos
+Método para agregar comentario
+Método para obtener la cantidad de comentarios
+Otros métodos según sea necesario
+Clase Comment:
+Atributos:
+Nombre del comentarista
+Texto del comentario
+Métodos:
+Constructor para inicializar los atributos
+Otros métodos según sea necesario
+Proyecto 2: Encapsulación con pedidos en línea
+Clase Order:
+
+Atributos:
+Lista de productos (objeto de la clase Product)
+Cliente (objeto de la clase Customer)
+Métodos:
+Método para calcular el costo total del pedido
+Método para generar la etiqueta de embalaje
+Método para generar la etiqueta de envío
+Otros métodos según sea necesario
+Clase Product:
+
+Atributos:
+Nombre
+Identificación
+Precio
+Cantidad
+Métodos:
+Constructor para inicializar los atributos
+Otros métodos según sea necesario
+Clase Customer:
+
+Atributos:
+Nombre
+Dirección (objeto de la clase Address)
+Métodos:
+Método para devolver la dirección del cliente
+Otros métodos según sea necesario
+Clase Address:
+
+Atributos:
+Dirección postal
+Ciudad
+Estado/provincia
+País
+Métodos:
+Método para verificar si la dirección está en EE. UU.
+Método para devolver la dirección completa como una cadena
+Otros métodos según sea necesario
+Proyecto 3: Herencia con planificación de eventos
+Clase Event:
+
+Atributos:
+Título
+Descripción
+Fecha
+Hora
+Dirección (objeto de la clase Address)
+Métodos:
+Método para generar el mensaje de marketing estándar
+Método para generar el mensaje de marketing completo
+Método para generar el breve mensaje de marketing
+Otros métodos según sea necesario
+Clase Conference (hereda de Event):
+
+Atributos adicionales:
+Nombre del orador
+Capacidad del orador
+Métodos (pueden anular los métodos de la clase base según sea necesario)
+Clase Reception (hereda de Event):
+
+Atributos adicionales:
+Correo electrónico para confirmar la asistencia
+Métodos (pueden anular los métodos de la clase base según sea necesario)
+Clase OutdoorMeeting (hereda de Event):
+
+Atributos adicionales:
+Previsión meteorológica
+Métodos (pueden anular los métodos de la clase base según sea necesario)
+Proyecto 4: Polimorfismo con seguimiento de ejercicio
+Clase Activity:
+
+Atributos:
+Fecha
+Duración en minutos
+Métodos:
+Métodos virtuales para obtener la distancia, velocidad y ritmo
+Método para generar un resumen de la actividad
+Clase Running (hereda de Activity):
+
+Atributos adicionales:
+Distancia
+Métodos (anula los métodos virtuales de la clase base según sea necesario)
+Clase Cycling (hereda de Activity):
+
+Atributos adicionales:
+Velocidad
+Métodos (anula los métodos virtuales de la clase base según sea necesario)
+Clase Swimming (hereda de Activity):
+
+Atributos adicionales:
+Número de vueltas
+Métodos (anula los métodos virtuales de la clase base según sea necesario)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Clase: Video
+Atributos:
+  - title: string
+  - author: string
+  - duration: int
+Métodos:
+  - addComment(name: string, text: string): void
+  - getCommentCount(): int
+
+Clase: Comment
+Atributos:
+  - commenterName: string
+  - commentText: string
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Clase: Order
+Atributos:
+  - products: list<Product>
+  - customer: Customer
+Métodos:
+  - calculateTotalCost(): decimal
+  - generatePackingLabel(): string
+  - generateShippingLabel(): string
+
+Clase: Product
+Atributos:
+  - name: string
+  - id: int
+  - price: decimal
+  - quantity: int
+
+Clase: Customer
+Atributos:
+  - name: string
+  - address: Address
+
+Clase: Address
+Atributos:
+  - street: string
+  - city: string
+  - state: string
+  - country: string
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Clase: Event
+Atributos:
+  - title: string
+  - description: string
+  - date: DateTime
+  - time: TimeSpan
+  - address: Address
+Métodos:
+  - generateStandardMarketingMessage(): string
+  - generateFullMarketingMessage(): string
+  - generateBriefMarketingMessage(): string
+
+Clase: Conference (hereda de Event)
+Atributos adicionales:
+  - speakerName: string
+  - capacity: int
+
+Clase: Reception (hereda de Event)
+Atributos adicionales:
+  - confirmationEmail: string
+
+Clase: OutdoorMeeting (hereda de Event)
+Atributos adicionales:
+  - weatherForecast: string
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Clase: Activity
+Atributos:
+  - date: DateTime
+  - durationMinutes: int
+Métodos:
+  - getDistance(): decimal
+  - getSpeed(): decimal
+  - getPace(): decimal
+  - getSummary(): string
+
+Clase: Running (hereda de Activity)
+Atributos adicionales:
+  - distance: decimal
+
+Clase: Cycling (hereda de Activity)
+Atributos adicionales:
+  - speed: decimal
+
+Clase: Swimming (hereda de Activity)
+Atributos adicionales:
+  - laps: int
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Proyecto 1: Abstracción con vídeos de YouTube
+El programa crearía objetos de la clase Video y agregaría comentarios utilizando el método addComment(). Luego, se llamaría al método getCommentCount() para obtener el número de comentarios para cada vídeo.
+
+Proyecto 2: Encapsulación con pedidos en línea
+Se crearían objetos de la clase Order, que contendrían productos (objetos de la clase Product) y un cliente (objeto de la clase Customer). Se utilizarían los métodos calculateTotalCost(), generatePackingLabel() y generateShippingLabel() para realizar cálculos y generar etiquetas según sea necesario.
+
+Proyecto 3: Herencia con planificación de eventos
+El programa crearía objetos de las clases derivadas (Conference, Reception, OutdoorMeeting) que heredan de la clase base Event. Los métodos generateStandardMarketingMessage(), generateFullMarketingMessage() y generateBriefMarketingMessage() se llamarían según el tipo de evento para generar mensajes de marketing específicos.
+
+Proyecto 4: Polimorfismo con seguimiento de ejercicio
+Se crearían objetos de las clases derivadas (Running, Cycling, Swimming) que heredan de la clase base Activity. El método getSummary() se llamaría en cada objeto para generar un resumen de la actividad, utilizando los métodos virtuales getDistance(), getSpeed() y getPace() que podrían ser implementados de manera diferente en cada clase derivada.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------

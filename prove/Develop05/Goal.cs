@@ -1,9 +1,9 @@
 class Goal
 {
-    private string _name;
-    private string _description;
+    protected string _name;
+    protected string _description;
 
-    private int _points;
+    protected int _points;
 
     public Goal(string name, string description, int points)
     {
@@ -12,14 +12,17 @@ class Goal
         _points = points;
     }
 
-    public void RecordEvent()
+    public virtual void RecordEvent()
     {
-
+        // Método para registrar eventos relacionados con el objetivo
     }
 
-    public void IsComplete()
-    {
 
+
+
+    public virtual bool IsComplete()
+    {
+        return false;
     }
 
     public string GetDetailString()
@@ -30,5 +33,6 @@ class Goal
     public string GetStringRepresentation()
     {
         return $"{GetType().Name}:{_name}:{_description}:{_points}";
+
     }
 }
