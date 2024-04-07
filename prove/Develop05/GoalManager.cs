@@ -35,23 +35,19 @@ class GoalMananger
 
     public void ListGoalDetails()
     {
-        // Verificar si la lista tiene elementos
         if (_Goal.Count == 0)
         {
             Console.WriteLine("No hay metas registradas.");
             return;
         }
 
-        // Mostrar la lista de objetivos con detalles
         Console.WriteLine("------------------------------------------------------------------------------");
         Console.WriteLine("List of Goals:");
         Console.WriteLine();
         for (int i = 0; i < _Goal.Count; i++)
         {
-            // Obtener el detalle del objetivo
             string detail = "";
 
-            // Comprobar si el objetivo está completo
             if (_Goal[i].IsComplete())
             {
                 detail += "[X]";
@@ -61,13 +57,10 @@ class GoalMananger
                 detail += "[ ]";
             }
 
-            // Agregar espacio después del corchete
             detail += " ";
 
-            // Obtener el detalle del objetivo y agregarlo a detail
             detail += $"{i + 1}. {_Goal[i].GetDetailString()}";
 
-            // Mostrar el detalle del objetivo
             Console.WriteLine(detail);
         }
     }
@@ -76,7 +69,6 @@ class GoalMananger
     public void CreateGoal()
     {
 
-        // Declaración de variables
         string name, description;
         int points;
         int target;
@@ -95,7 +87,6 @@ class GoalMananger
         switch (option)
         {
             case "1":
-                // Agregar un SimpleGoal a la lista _Goal
                 Console.Write("What is the name of the simple goal?  ");
                 name = Console.ReadLine();
                 Console.WriteLine();
@@ -113,7 +104,6 @@ class GoalMananger
 
                 break;
             case "2":
-                // Agregar un EternalGoal a la lista _Goal
                 Console.Write("What is the name of the Eternal goal?  ");
                 name = Console.ReadLine();
                 Console.WriteLine();
@@ -131,7 +121,6 @@ class GoalMananger
                 break;
 
             case "3":
-                // Agregar un CheckListGoal a la lista _Goal
                 Console.Write("What is the name of the CheckList goal?  ");
                 name = Console.ReadLine();
                 Console.WriteLine();
@@ -145,12 +134,9 @@ class GoalMananger
                 string pointsInput = Console.ReadLine();
                 if (int.TryParse(pointsInput, out points))
                 {
-                    // Conversión exitosa
-                    // points ahora tiene el valor entero
                 }
                 else
                 {
-                    // Manejar el caso en que la entrada no sea un número entero válido
                     Console.WriteLine("Invalid input. Please enter a valid integer.");
                 }
 
@@ -183,7 +169,7 @@ class GoalMananger
 
         if (goalNumber >= 0 && goalNumber < _Goal.Count)
         {
-            _Goal[goalNumber].RecordEvent(); // Llama al método RecordEvent() para el objetivo seleccionado
+            _Goal[goalNumber].RecordEvent();
             Console.WriteLine("Event recorded successfully.");
         }
         else
@@ -204,7 +190,6 @@ class GoalMananger
             {
                 foreach (Goal goal in _Goal)
                 {
-                    // Escribir todos los detalles de la meta en una línea del archivo
                     writer.WriteLine(goal.GetStringRepresentation());
                 }
             }
@@ -225,21 +210,19 @@ class GoalMananger
 
         try
         {
-            _Goal.Clear(); // Limpiar la lista de metas antes de cargar desde el archivo
+            _Goal.Clear();
 
             using (StreamReader reader = new StreamReader(filePath))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    // Analizar la línea para obtener los detalles de la meta
                     string[] parts = line.Split(':');
                     string type = parts[0];
                     string name = parts[1];
                     string description = parts[2];
                     int points = int.Parse(parts[3]);
 
-                    // Crear la instancia adecuada de la meta según el tipo
                     switch (type)
                     {
                         case "SimpleGoal":

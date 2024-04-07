@@ -1,2 +1,0 @@
-SimpleGoal:read:read always:5
-EternalGoal:pray:pray all days:10

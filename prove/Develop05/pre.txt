@@ -1,2 +1,0 @@
-SimpleGoal:read:read all day:5
-EternalGoal:pret:prea to ma:6

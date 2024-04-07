@@ -14,7 +14,7 @@ class Goal
 
     public virtual void RecordEvent()
     {
-        // Método para registrar eventos relacionados con el objetivo
+
     }
 
 

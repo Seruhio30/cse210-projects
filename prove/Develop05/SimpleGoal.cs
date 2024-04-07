@@ -9,9 +9,8 @@ class SimpleGoal : Goal
 
     public override void RecordEvent()
     {
-        // Marcar el objetivo como completo cuando se registra un evento
-        base.RecordEvent(); // Llama al método de la clase base (en este caso, no hace nada)
-        _IsComplete = true; // Marca el objetivo como completo
+        base.RecordEvent();
+        _IsComplete = true;
     }
 
 

@@ -12,8 +12,8 @@ class CheckListGoal : Goal
 
     public override void RecordEvent()
     {
-        // No hacer nada, ya que los objetivos eternos nunca se completan
-        base.RecordEvent(); // Llama al método de la clase base (en este caso, no hace nada)
+
+        base.RecordEvent();
     }
 
 

@@ -9,26 +9,22 @@ class EternalGoal : Goal
 
     public override void RecordEvent()
     {
-        // No hacer nada, ya que los objetivos eternos nunca se completan
-        base.RecordEvent(); // Llama al método de la clase base (en este caso, no hace nada)
+        base.RecordEvent();
     }
 
 
 
     public override bool IsComplete()
     {
-        // Método para verificar si el objetivo eterno está completo
-        return false; // Dado que los objetivos eternos nunca se completan
+        return false;
     }
 
     public string GetDeatailString()
     {
-        // Get detail string for eternal goal
         return base.GetDetailString();
     }
     public string GetStringRepresentation()
     {
-        // Get string representation for eternal goal
         return base.GetStringRepresentation();
     }
 }
